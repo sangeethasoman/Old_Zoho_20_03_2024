@@ -5954,7 +5954,7 @@ def add_recurring_bills(request):
     if bill_no !=  None:
         bill_num = bill_no['bill_no'] 
 
-    if last_id['reference_numb'] !=  None:
+    if last_id != None and ['reference_numb'] !=  None:
         if request.user.is_authenticated:
             last_id = last_id['reference_numb']
             next_no = int(last_id) + 1
@@ -12239,12 +12239,12 @@ def new_bill(request):
     bank=Bankcreation.objects.filter(user_id=user.id)
     last_id = PurchaseBills.objects.filter(user_id=user.id,company_id=company.id).order_by('-reference_numbr').values('reference_numbr').first()
     bill_no = PurchaseBills.objects.filter(user_id=request.user.id,company_id=company.id).order_by('-bill_no').values('bill_no').first()
-    print(bill_no)
+    print(last_id)
     bill_num = "None"
     if bill_no !=  None:
         bill_num = bill_no['bill_no'] 
         
-    if last_id['reference_numbr'] !=  None:
+    if last_id !=  None and last_id['reference_numbr'] !=  None:
         if request.user.is_authenticated:
             last_id = last_id['reference_numbr']
             next_no = int(last_id) + 1

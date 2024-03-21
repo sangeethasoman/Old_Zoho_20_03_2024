@@ -714,11 +714,11 @@
                             {% for item in bill_item %}
                         <tr tr style="color: black;">
                             <td  style="text-align: left; width:  30rem;">{{ forloop.counter }}</td>
-                            <td  style="text-align: left; width:  30rem;">{{ item.item_name }}</td>
+                            <td  style="text-align: left; width:  30rem;">{{ item.item }}</td>
                             <td style="text-align: left; width:  30rem;">{{ item.hsn }}</td>
                             <td style="text-align: left; width:  30rem;">{{ item.quantity }}</td>
                             <td style="text-align: left; width:  30rem;">{{ item.rate|floatformat:2 }}</td>
-                            <td style="text-align: left; width:  30rem;">{{ item.tax_percentage|floatformat:2 }}</td>
+                            <td style="text-align: left; width:  30rem;">{{ item.tax|floatformat:2 }}</td>
                             <td style="text-align: left; width: 30rem;">{{ item.discount|floatformat:2}}</td>
                             <td style="text-align: left; width:  30rem;">{{ item.amount|floatformat:2 }}</td>
                         </tr>
@@ -912,11 +912,11 @@
                                 {% for item in bill_item %}
                                 <tr>
                                     <td  style="text-align: left; width:  30rem;">{{ forloop.counter }}</td>
-                                    <td  style="text-align: left; width:  30rem;">{{ item.item_name }}</td>
+                                    <td  style="text-align: left; width:  30rem;">{{ item.item }}</td>
                                     <td style="text-align: left; width:  30rem;">{{ item.hsn }}</td>
                                     <td style="text-align: left; width:  30rem;">{{ item.quantity }}</td>
                                     <td style="text-align: left; width:  30rem;">{{ item.rate|floatformat:2 }}</td>
-                                    <td style="text-align: left; width:  30rem;">{{ item.tax_percentage|floatformat:2 }}</td>
+                                    <td style="text-align: left; width:  30rem;">{{ item.tax|floatformat:2 }}</td>
                                     <td style="text-align: left; width: 30rem;">{{ item.discount|floatformat:2}}</td>
                                     <td style="text-align: left; width:  30rem;">{{ item.amount|floatformat:2 }}</td>
                                 </tr>
@@ -1106,11 +1106,11 @@
                                         {% for item in bill_item %}
                         <tr>
                             <td  style="color:black">{{ forloop.counter }}</td>
-                            <td  style="color:black">{{ item.item_name }}</td>
+                            <td  style="color:black">{{ item.item }}</td>
                             <td style="color:black">{{ item.hsn }}</td>
                             <td style="color:black">{{ item.quantity }}</td>
                             <td style="color:black">{{ item.rate|floatformat:2 }}</td>
-                            <td style="color:black">{{ item.tax_percentage|floatformat:2 }}</td>
+                            <td style="color:black">{{ item.tax|floatformat:2 }}</td>
                             <td style="color:black">{{ item.discount|floatformat:2}}</td>
                             <td style="color:black">{{ item.amount|floatformat:2 }}</td>
                         </tr>
