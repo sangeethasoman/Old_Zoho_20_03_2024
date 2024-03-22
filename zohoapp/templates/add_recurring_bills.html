@@ -238,6 +238,13 @@
       color: #444;
       line-height: 10px !important;
   }
+  .table th, .jsgrid .jsgrid-table th, .table td, .jsgrid .jsgrid-table td {
+    vertical-align: middle;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+    padding: 11px;
+}
   </style>
    <div class="row  ml-2">
     <input type="hidden" id="state" value="{{ company.state }}">
@@ -724,6 +731,9 @@
   </div>
     
 </div>
+<div class="row mt-2">
+  <div class="col-md-12 mt-3">
+   
        
           <table class="table table-bordered table-responsive text-white" id="tab_logic">
             <thead>
@@ -820,7 +830,9 @@
                   title="Add Another Line">+</a></td>
             </tr>
           </table> 
-
+ 
+  </div>
+</div>
 
       <div class="row clearfix" >
         <div class="col-md-5 mt-2 p-3 mx-5">
