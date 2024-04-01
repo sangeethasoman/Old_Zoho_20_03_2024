@@ -6304,7 +6304,7 @@ def view_recurring_bills(request,id):
     vend = vendor_table.objects.get(id = rbill.vendor_name.split(" ")[0])
     print(cust.state)
     print(company.state)
-    gst_or_igst = "GST" if isGST(cust.placeofsupply) else "IGST"
+    gst_or_igst = "GST" if rbill.place_of_supply.split("-")[1] == company.state else "IGST"
     tax_total = [] 
     for b in billitem:
         if b.tax not in tax_total: 
@@ -12955,10 +12955,10 @@ def bill_view(request, b_id):
     bill = PurchaseBills.objects.get(id=b_id)
     items = PurchaseBillItems.objects.filter(purchase_bill=bill)
     comment = purchase_comments.objects.filter(purchase_bill=b_id) 
-    print(bill.cusname_id)
+    print(bill.igst)
     cust = customer.objects.get(id = bill.cusname_id)
-    gst_or_igst = "GST" if isGST(cust.placeofsupply) else "IGST"
-    print(cust.placeofsupply)
+    gst_or_igst = "GST" if  bill.igst == 0.0 else "IGST"
+    print(cust.placeofsupply) 
     context = {
         'company': company,
         'bills': bills,
@@ -21387,7 +21387,7 @@ def update_bills_save(request,pk):
         total = request.POST['total']
         amt_paid = request.POST['amtPaid']
         bill.balance = float(total) - float(amt_paid)
-        cust = customer.objects.get(customerName=request.POST['customer_name'])
+        cust = customer.objects.get(customerName=request.POST['customer_name'],user = request.user)
         bill.cusname_id = cust.id
 
         old=bill.attachment
