@@ -735,7 +735,7 @@
   <div class="col-md-12 mt-3">
    
        
-          <table class="table table-bordered table-responsive text-white" id="tab_logic">
+          <table class="table table-bordered table-responsive text-white" style="background-color: rgba(58, 57, 57, 0.8);" id="tab_logic">
             <thead>
               <tr>
                 <th class="text-center">Sl.No.</th>
@@ -795,13 +795,13 @@
                   </select>
 
                   <select name="tax2[]" id="inter_tax0" class="form-control tax2 d-none mb-2 text-dark bg-light" style="width: 80px;">
-                    <option id="ta5" value=0 text=" "  >Choose IGST</option>
+                    <option value=0 text="{{ cmp1.state }}">0.0% IGST</option>
                     <option value=28 text="{{ cmp1.state }}">28.0% IGST</option>
                     <option value=18 text="{{ cmp1.state }}">18.0% IGST</option>
                     <option value=12 text="{{ cmp1.state }}">12.0% IGST</option>
                     <option value=5 text="{{ cmp1.state }}">05.0% IGST</option>
                     <option value=3 text="{{ cmp1.state }}">03.0% IGST</option>
-                    <option value=0 text="{{ cmp1.state }}">0.0% IGST</option>
+                   
                   </select>
                 </td>
                 <td>
@@ -846,7 +846,7 @@
           <div>
           </div>
         </div>
-        <div class="col-md-5 table-responsive-md mt-3 ml-5 mr-0 p-2" id="tab_logic_total" style="background-color:rgba(5, 5, 5, 0.4); border: 1px solid rgba(128, 128, 128, 0.6);"><br>
+        <div class="col-md-5 table-responsive-md mt-3 ml-5 mr-0 p-2" id="tab_logic_total" style="background-color: rgba(58, 57, 57, 0.8); border: 1px solid rgba(128, 128, 128, 0.6);"><br>
           <div class="row container-fluid p-2 m-0">
             <div class="col-sm-5 mt-2">
               <label for="a" class="text-center">Sub Total</label>
@@ -3143,23 +3143,23 @@ $(document).ready(function() {
             <input type="hidden" id="tax_total0" class="form-control mb-2 d-none" >
             <input type="text" placeholder="Select TAX" class="form-control selecttax text-dark bg-light" id="selecttax${roinc}" style = "width:100px;" >
             <select name="tax1[]" id="intra_tax${roinc}" class="form-control tax1 d-none mb-2 text-dark bg-light" >
-                <option id="ta1" value=0 text=" ">Choose GST</option>
+                <option value=0 text="{{ cmp1.state }}">0.0% GST</option>
                 <option value=28 text="{{ cmp1.state }}">28.0% GST</option>
                 <option value=18 text="{{ cmp1.state }}">18.0% GST</option>
                 <option value=12 text="{{ cmp1.state }}">12.0% GST</option>
                 <option value=5 text="{{ cmp1.state }}">05.0% GST</option>
                 <option value=3 text="{{ cmp1.state }}">03.0% GST</option>
-                <option value=0 text="{{ cmp1.state }}">0.0% GST</option>
+               
             </select>
 
             <select name="tax2[]" id="inter_tax${roinc}" class="form-control tax2 d-none mb-2 text-dark bg-light">
-              <option id="ta5" value=0 text=" " >Choose IGST</option>
+              <option value=0 text="{{ cmp1.state }}">0.0% IGST</option>
               <option value=28 text="{{ cmp1.state }}">28.0% IGST</option>
               <option value=18 text="{{ cmp1.state }}">18.0% IGST</option>
               <option value=12 text="{{ cmp1.state }}">12.0% IGST</option>
               <option value=5 text="{{ cmp1.state }}">05.0% IGST</option>
               <option value=3 text="{{ cmp1.state }}">03.0% IGST</option>
-              <option value=0 text="{{ cmp1.state }}">0.0% IGST</option>
+              
             </select>
           </td>
             
@@ -3646,7 +3646,7 @@ function reloadVendor() {
       var dropdown = $('#vendor');
       dropdown.empty();
       dropdown.append($('<option></option>').text('Select Vendor'));
-      $.each(data, function(key, value) {
+      $.each(data, function(key, value) { debugger
         dropdown.append($('<option></option>').attr('value', key).text(value[1] + ' ' + value[2]).val(value[3]+' '+ value[1] + ' ' + value[2]));
       });
     },
@@ -5685,9 +5685,10 @@ function closeForm1() {
       }
   }
 </script>
- <!-- <script>
+ <script>
   $(document).ready(function() {
-    reloadItem();
+    reloadVendor();
+    reloadCustomer();
  });
- </script> -->
+ </script>
 {% endblock %}

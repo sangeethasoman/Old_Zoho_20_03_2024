@@ -748,7 +748,7 @@
     
 </div>
   
-          <table class="table table-bordered table-responsive text-white" id="tab_logic">
+          <table class="table table-bordered table-responsive text-white" id="tab_logic" style="background-color: rgba(58, 57, 57, 0.8);">
             <thead>
               <tr>
                 <th class="text-center text-uppercase">Sl.No. </th>
@@ -795,14 +795,14 @@
 
                
                 <td>
-                  <input type="text" name='qty[]' placeholder='Qty' id="qty{{forloop.counter|add:'-1'}}" value="{{ri.quantity}}"  class="bg-transparent border-0 text-white text-right qty text-dark bg-light" step=0 min=0 style="width: 50px;"/> <br>
+                  <input type="number" name='qty[]' placeholder='Qty' id="qty{{forloop.counter|add:'-1'}}" value="{{ri.quantity}}"  class="bg-transparent border-0 text-white text-right qty text-dark bg-light" step=0 min=0 style="width: 50px;"/> <br>
                   <span class="text-warning">Available Stock : <span id="stock_data{{forloop.counter|add:'-1'}}" class="text-warning stock_data">
                   {% for i in item %}      
                   {% if i.Name == ri.item %}{{ i.stock|add:ri.quantity }} {% endif %}
                   {% endfor %}
                   </span>
                   </span>
-                  <input  type="text" hidden class="stock_data_hidden" name ="stock[]" id="stock_data_hidden{{forloop.counter|add:'-1'}}" value="0"/>
+                  <input  type="text" hidden class="stock_data_hidden" name ="stock[]" id="stock_data_hidden{{forloop.counter|add:'-1'}}" value="{% for i in item %}{% if i.Name == ri.item %}{{ i.stock|add:ri.quantity }}{% endif %}{% endfor %}"/>
                 </td>
                 <td>
                   <input type="text" name='rate[]' id="rate{{forloop.counter|add:'-1'}}" placeholder='Rate' value="{{ ri.rate }}" class="bg-transparent border-0 text-white text-right rate text-dark bg-light" step="0.00" min="0" style="width: 50px;"/>
@@ -876,7 +876,7 @@
           <div>
           </div>
         </div>
-        <div class="col-md-5 table-responsive-md mt-3 ml-5 mr-0 p-2" id="tab_logic_total" style="background-color:rgba(5, 5, 5, 0.4); border: 1px solid rgba(128, 128, 128, 0.6);"><br>
+        <div class="col-md-5 table-responsive-md mt-3 ml-5 mr-0 p-2" id="tab_logic_total" style=" background-color: rgba(58, 57, 57, 0.8); border: 1px solid rgba(128, 128, 128, 0.6);"><br>
           <div class="row container-fluid p-2 m-0">
             <div class="col-sm-5 mt-2">
               <label for="a" class="text-center">Sub Total</label>
@@ -3583,23 +3583,23 @@ debugger
             <input type="hidden" id="tax_total0" class="form-control mb-2 d-none">
             <input type="text" placeholder="Select TAX" class="form-control selecttax text-dark bg-light" id="selecttax${roinc}"  style = "width:80px;">
             <select name="tax1[]" id="intra_tax${roinc}" class="form-control tax1 d-none mb-2 text-dark bg-light" style="width: 80px;">
-                <option id="ta1" value=0 text=" ">Choose GST</option>
+                <option value=0 text="{{ cmp1.state }}">0.0% GST</option>
                 <option value=28 text="{{ cmp1.state }}">28.0% GST</option>
                 <option value=18 text="{{ cmp1.state }}">18.0% GST</option>
                 <option value=12 text="{{ cmp1.state }}">12.0% GST</option>
                 <option value=5 text="{{ cmp1.state }}">05.0% GST</option>
                 <option value=3 text="{{ cmp1.state }}">03.0% GST</option>
-                <option value=0 text="{{ cmp1.state }}">0.0% GST</option>
+                
             </select>
 
             <select name="tax2[]" id="inter_tax${roinc}" class="form-control tax2 d-none mb-2 text-dark bg-light" style="width: 80px;">
-              <option id="ta5" value=0 text=" " >Choose IGST</option>
+              
+              <option value=0 text="{{ cmp1.state }}">0.0% IGST</option>
               <option value=28 text="{{ cmp1.state }}">28.0% IGST</option>
               <option value=18 text="{{ cmp1.state }}">18.0% IGST</option>
               <option value=12 text="{{ cmp1.state }}">12.0% IGST</option>
               <option value=5 text="{{ cmp1.state }}">05.0% IGST</option>
               <option value=3 text="{{ cmp1.state }}">03.0% IGST</option>
-              <option value=0 text="{{ cmp1.state }}">0.0% IGST</option>
             </select>
           </td>
             
@@ -4563,6 +4563,11 @@ $(document).on("click",".selecttax",function(){
 
   $(document).on('change','.qty',function(){debugger
 
+    var n = $(this).attr("id").slice(3);
+    var qty=$(this).val();
+    var stock = $('#stock_data_hidden'+n).val();
+    $('#stock_data'+n)[0].innerHTML = parseInt(stock) + parseInt(qty); 
+
 var row_count = $("#items-table-body tr").length;
 var tax_tot = 0
 
@@ -4580,7 +4585,7 @@ for(var i=0; i<row_count;i++){
 
   var stock = $("#stock_data_hidden" +i).val();
 
-  $("#stock_data" +i)[0].innerHTML = parseInt(stock) + parseInt(qnty);
+ 
 
   if (tax1 == 0){
     if(tax2 == 0){
@@ -5943,4 +5948,10 @@ function closeForm1() {
      $("#balanceam_t").val(balance);
    });  
 </script>
+<script>
+  $(document).ready(function() {
+    reloadVendor();
+    reloadCustomer();
+ });
+ </script>
 {% endblock %}

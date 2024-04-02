@@ -233,7 +233,7 @@
                 var tax = $(this).find('.tax').val();
                 var dic = $(this).find('.discount').val();
                 var stock = $(this).find('.stock_data_hidden').val();
-                $(this).find('.stock_data')[0].innerHTML = parseInt(stock) + parseInt(qty);
+                //$(this).find('.stock_data')[0].innerHTML = parseInt(stock) + parseInt(qty);
                 console.log(qty);
                 console.log(rate);
                 console.log(tax);
@@ -810,7 +810,7 @@ else{
                 </label>
             </div> -->
             <label for="">Price List</label><br>
-            <table class="table table-bordered table-responsive text-white" id="item_table"  
+            <table class="table table-bordered table-responsive text-white" id="item_table" style="background-color: rgba(58, 57, 57, 0.8);"  
                 onchange="calc()">
                 <thead>
                     <tr>
@@ -864,7 +864,7 @@ else{
                                   {% if i.Name == item.item_name %}{{ i.stock|add:item.quantity }} {% endif %}
                                  {% endfor %}
                                 </span></span>
-                                <input  type="text" hidden class="stock_data_hidden" name ="stock[]" id="stock_data_hidden{{ forloop.counter }}" value="0"/>
+                                <input  type="text" hidden class="stock_data_hidden" name ="stock[]" id="stock_data_hidden{{ forloop.counter }}" value="{% for i in items %}{% if i.Name == item.item_name %}{{ i.stock|add:item.quantity }}{% endif %}{% endfor %}"/>
                         </td>
                         <td class='text-right'><input type='number' id='rate{{ forloop.counter }}' style="width: 80px;"
                                 class='bg-transparent border-0 text-white text-right rate' name='rate[]' value="{{item.rate}}">
@@ -6026,5 +6026,16 @@ function closeForm1() {
    var balance = parseFloat($("#total").val()) - parseFloat($("#amtPaid").val()) 
    $("#balanceam_t").val(balance);
  });  
+</script>
+<script>
+  $(document).on('change','.qty',function(){
+    
+    debugger
+    var n = $(this).attr("id").slice(3);
+    var qty=$(this).val();
+    var stock = $('#stock_data_hidden'+n).val();
+    $('#stock_data'+n)[0].innerHTML = parseInt(stock) + parseInt(qty);
+  
+  });
 </script>
 {% endblock %}
